@@ -16,18 +16,6 @@ pipeline {
             }
         }
 
-        stage('Setup .NET') {
-            steps {
-                bat '''
-                echo Installing .NET SDK %DOTNET_VERSION% ...
-                curl -L -o dotnet-install.ps1 https://dot.net/v1/dotnet-install.ps1
-                powershell -ExecutionPolicy Bypass -File dotnet-install.ps1 -Channel 6.0
-                setx PATH "%PATH%;%USERPROFILE%\\.dotnet"
-                dotnet --version
-                '''
-            }
-        }
-
         stage('Restore dependencies') {
             steps {
                 bat 'dotnet restore'
